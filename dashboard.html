@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — CareerOS</title>
+    <meta
+      name="description"
+      content="AI career intelligence dashboard — health score, ATS, skills, and roadmaps."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body class="dash-body">
+    <div class="ambient dash-ambient" aria-hidden="true">
+      <div class="orb orb--1"></div>
+      <div class="orb orb--2"></div>
+      <div class="orb orb--3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <div class="dash-app" data-dash-app>
+      <!-- Mobile sidebar backdrop -->
+      <div class="dash-sidebar-backdrop" data-dash-backdrop hidden aria-hidden="true"></div>
+
+      <aside class="dash-sidebar glass-panel" id="dash-sidebar" aria-label="Main navigation">
+        <div class="dash-sidebar__brand">
+          <a href="index.html" class="logo">
+            <span class="logo__mark logo__mark--sm" aria-hidden="true"></span>
+            CareerOS
+          </a>
+          <span class="dash-pill dash-pill--live">AI</span>
+        </div>
+
+        <nav class="dash-nav" aria-label="Dashboard">
+          <span class="dash-nav__label">Workspace</span>
+          <a class="dash-nav__link dash-nav__link--active" href="#welcome">
+            <span class="dash-nav__ico" aria-hidden="true"></span>
+            Overview
+          </a>
+          <a class="dash-nav__link" href="#career-health">
+            <span class="dash-nav__ico dash-nav__ico--pulse" aria-hidden="true"></span>
+            Career health
+          </a>
+          <a class="dash-nav__link" href="#resume-ats">
+            <span class="dash-nav__ico" aria-hidden="true"></span>
+            Resume ATS
+          </a>
+          <a class="dash-nav__link" href="resume-analysis.html">
+            <span class="dash-nav__ico" aria-hidden="true"></span>
+            Resume analysis
+          </a>
+          <a class="dash-nav__link" href="resume-upload.html">
+            <span class="dash-nav__ico" aria-hidden="true"></span>
+            Upload resume
+          </a>
+          <a class="dash-nav__link" href="#skills">
+            <span class="dash-nav__ico" aria-hidden="true"></span>
+            Skill progress
+          </a>
+
+          <span class="dash-nav__label dash-nav__label--gap">Growth</span>
+          <a class="dash-nav__link" href="#dream-company">
+            <span class="dash-nav__ico" aria-hidden="true"></span>
+            Dream companies
+          </a>
+          <a class="dash-nav__link" href="#missing-skills">
+            <span class="dash-nav__ico" aria-hidden="true"></span>
+            Skill gaps
+          </a>
+
+          <span class="dash-nav__label dash-nav__label--gap">Productivity</span>
+          <a class="dash-nav__link" href="#reminders">
+            <span class="dash-nav__ico" aria-hidden="true"></span>
+            Reminders
+          </a>
+          <a class="dash-nav__link" href="#documents">
+            <span class="dash-nav__ico" aria-hidden="true"></span>
+            Documents
+          </a>
+        </nav>
+
+        <div class="dash-sidebar__foot">
+          <a href="login.html" class="dash-sidebar__muted">Sign out</a>
+        </div>
+      </aside>
+
+      <div class="dash-main-column">
+        <header class="dash-topbar glass-panel">
+          <div class="dash-topbar__start">
+            <button
+              type="button"
+              class="dash-menu-btn"
+              data-dash-sidebar-toggle
+              aria-label="Open navigation menu"
+              aria-expanded="false"
+              aria-controls="dash-sidebar"
+            >
+              <span class="dash-menu-btn__bar" aria-hidden="true"></span>
+              <span class="dash-menu-btn__bar" aria-hidden="true"></span>
+              <span class="dash-menu-btn__bar" aria-hidden="true"></span>
+            </button>
+            <div class="dash-topbar__title">
+              <p class="dash-topbar__crumb muted mono">workspace / intelligence</p>
+              <h1 class="dash-topbar__heading">Dashboard</h1>
+            </div>
+          </div>
+
+          <div class="dash-topbar__center">
+            <label class="dash-search" aria-label="Search">
+              <svg class="dash-search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+                <path d="M20 20l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              <input type="search" class="dash-search__input" placeholder="Search roadmaps, roles, skills…" />
+            </label>
+          </div>
+
+          <div class="dash-topbar__end">
+            <button type="button" class="dash-icon-btn" aria-label="Notifications">
+              <span class="dash-icon-btn__dot" aria-hidden="true"></span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Z"
+                  fill="currentColor"
+                  opacity="0.9"
+                />
+                <path
+                  d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2h16l-2-2Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <div class="dash-user" aria-label="Signed in as Alex Morgan, Pro tier">
+              <span class="dash-user__avatar" aria-hidden="true">AM</span>
+              <div class="dash-user__meta">
+                <span class="dash-user__name">Alex Morgan</span>
+                <span class="dash-user__role muted small">Pro · Product</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main class="dash-content" id="dash-main">
+          <!-- 1. Welcome -->
+          <section
+            class="dash-welcome dash-card dash-card--hero glass-panel glass-panel--elevated"
+            id="welcome"
+            data-dash-animate
+          >
+            <div class="dash-welcome__text">
+              <p class="dash-eyebrow">
+                <span class="dash-eyebrow__dot" aria-hidden="true"></span>
+                Good evening
+              </p>
+              <h2 class="dash-welcome__title">Welcome back, <span class="gradient-text">Alex</span></h2>
+              <p class="dash-welcome__sub muted">
+                Your career graph updated 12 minutes ago. Two high-impact actions can raise your health score
+                this week.
+              </p>
+              <div class="dash-welcome__actions">
+                <button type="button" class="btn btn--primary btn--sm">Run AI review</button>
+                <a href="#missing-skills" class="btn btn--ghost btn--sm">View gaps</a>
+              </div>
+            </div>
+            <div class="dash-welcome__stats glass-panel glass-panel--inset">
+              <div>
+                <span class="mono muted">Active goals</span>
+                <strong>4</strong>
+              </div>
+              <div>
+                <span class="mono muted">Interviews (30d)</span>
+                <strong>2</strong>
+              </div>
+              <div>
+                <span class="mono muted">Focus role</span>
+                <strong class="dash-truncate">Senior PM</strong>
+              </div>
+            </div>
+          </section>
+
+          <div class="dash-grid">
+            <!-- 2. Career Health -->
+            <section class="dash-card glass-panel glass-panel--elevated" id="career-health" data-dash-animate>
+              <div class="dash-card__head">
+                <div>
+                  <h3 class="dash-card__title">Career health score</h3>
+                  <p class="dash-card__desc muted small">Composite of momentum, network, and role fit.</p>
+                </div>
+                <span class="dash-pill dash-pill--good">+4.2 this week</span>
+              </div>
+              <div class="dash-health">
+                <div class="dash-ring" data-pct="78" role="img" aria-label="Career health 78 out of 100">
+                  <svg viewBox="0 0 120 120" class="dash-ring__svg" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="var(--accent)" />
+                        <stop offset="50%" stop-color="var(--accent-3)" />
+                        <stop offset="100%" stop-color="var(--accent-2)" />
+                      </linearGradient>
+                    </defs>
+                    <circle class="dash-ring__track" cx="60" cy="60" r="52" />
+                    <circle class="dash-ring__fill" cx="60" cy="60" r="52" data-ring-circle />
+                  </svg>
+                  <div class="dash-ring__center">
+                    <span class="dash-ring__num" data-ring-display>78</span>
+                    <span class="dash-ring__label muted mono">of 100</span>
+                  </div>
+                </div>
+                <ul class="dash-health__metrics">
+                  <li>
+                    <span class="muted">Momentum</span>
+                    <div class="dash-meter dash-meter--neon">
+                      <div class="dash-meter__fill" data-meter-fill data-meter-target="0.82"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="muted">Network signal</span>
+                    <div class="dash-meter dash-meter--neon">
+                      <div class="dash-meter__fill" data-meter-fill data-meter-target="0.64"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="muted">Role-market fit</span>
+                    <div class="dash-meter dash-meter--neon">
+                      <div class="dash-meter__fill dash-meter__fill--alt" data-meter-fill data-meter-target="0.71"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- 3. Resume ATS -->
+            <section class="dash-card glass-panel glass-panel--elevated" id="resume-ats" data-dash-animate>
+              <div class="dash-card__head">
+                <div>
+                  <h3 class="dash-card__title">Resume ATS score</h3>
+                  <p class="dash-card__desc muted small">Benchmarked vs. target JD keywords.</p>
+                </div>
+                <button type="button" class="btn btn--ghost btn--sm">Open lab</button>
+              </div>
+              <div class="dash-ats">
+                <div class="dash-ats__score">
+                  <span class="dash-ats__big">86</span>
+                  <div>
+                    <p class="dash-ats__label muted small">Strong match tier</p>
+                    <p class="mono muted small">last scan · 4h ago</p>
+                  </div>
+                </div>
+                <div class="dash-ats__breakdown">
+                  <div class="dash-ats__row">
+                    <span class="muted">Keywords &amp; taxonomy</span>
+                    <strong>91%</strong>
+                  </div>
+                  <div class="dash-meter">
+                    <div class="dash-meter__fill dash-meter__fill--blue" data-meter-fill data-meter-target="0.91"></div>
+                  </div>
+                  <div class="dash-ats__row">
+                    <span class="muted">Structure &amp; readability</span>
+                    <strong>84%</strong>
+                  </div>
+                  <div class="dash-meter">
+                    <div class="dash-meter__fill dash-meter__fill--blue" data-meter-fill data-meter-target="0.84"></div>
+                  </div>
+                  <div class="dash-ats__row">
+                    <span class="muted">Quantified impact lines</span>
+                    <strong>73%</strong>
+                  </div>
+                  <div class="dash-meter">
+                    <div class="dash-meter__fill dash-meter__fill--violet" data-meter-fill data-meter-target="0.73"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 7. Reminders -->
+            <section class="dash-card glass-panel glass-panel--elevated dash-card--reminders" id="reminders" data-dash-animate>
+              <div class="dash-card__head">
+                <div>
+                  <h3 class="dash-card__title">Upcoming reminders</h3>
+                  <p class="dash-card__desc muted small">Stay on pace for your milestones.</p>
+                </div>
+              </div>
+              <ul class="dash-reminders">
+                <li class="dash-reminders__item">
+                  <time class="dash-reminders__date mono" datetime="2026-05-18">May 18</time>
+                  <div>
+                    <p class="dash-reminders__title">Mock interview · Staff PM loop</p>
+                    <p class="muted small">Calendar · 45 min · prep pack ready</p>
+                  </div>
+                  <span class="dash-reminders__tag">Prep</span>
+                </li>
+                <li class="dash-reminders__item dash-reminders__item--accent">
+                  <time class="dash-reminders__date mono" datetime="2026-05-20">May 20</time>
+                  <div>
+                    <p class="dash-reminders__title">Ship portfolio case study v2</p>
+                    <p class="muted small">Evidence for dream company pillar</p>
+                  </div>
+                  <span class="dash-reminders__tag dash-reminders__tag--purple">Goals</span>
+                </li>
+                <li class="dash-reminders__item">
+                  <time class="dash-reminders__date mono" datetime="2026-05-24">May 24</time>
+                  <div>
+                    <p class="dash-reminders__title">Resume ATS deep clean</p>
+                    <p class="muted small">Suggested by AI analyzer</p>
+                  </div>
+                  <span class="dash-reminders__tag dash-reminders__tag--muted">Docs</span>
+                </li>
+              </ul>
+            </section>
+
+            <!-- 4. Skill Progress chart -->
+            <section class="dash-card glass-panel glass-panel--elevated dash-card--wide" id="skills" data-dash-animate>
+              <div class="dash-card__head">
+                <div>
+                  <h3 class="dash-card__title">Skill progress</h3>
+                  <p class="dash-card__desc muted small">
+                    Signal strength relative to Staff PM benchmarks.
+                  </p>
+                </div>
+                <div class="dash-card__head-actions">
+                  <span class="dash-pill">Benchmark</span>
+                  <span class="dash-pill dash-pill--outline">90-day plan</span>
+                </div>
+              </div>
+              <div class="dash-chart-wrap">
+                <canvas id="skillChart" height="280" aria-label="Radar chart of skill proficiency"></canvas>
+              </div>
+            </section>
+
+            <!-- 5. Dream Company -->
+            <section class="dash-card glass-panel glass-panel--elevated" id="dream-company" data-dash-animate>
+              <div class="dash-card__head">
+                <div>
+                  <h3 class="dash-card__title">Dream company pipeline</h3>
+                  <p class="dash-card__desc muted small">Readiness versus your archetype clusters.</p>
+                </div>
+              </div>
+              <div class="dash-companies">
+                <article class="dash-companies__tile glass-panel glass-panel--inset">
+                  <header>
+                    <div class="dash-companies__logo" aria-hidden="true">N</div>
+                    <div>
+                      <h4 class="dash-companies__name">Nebula Dynamics</h4>
+                      <p class="muted small">Staff Product · infra-adjacent</p>
+                    </div>
+                  </header>
+                  <div class="dash-companies__row muted small"><span>Readiness</span><span>High</span></div>
+                  <div class="dash-meter dash-meter--thin">
+                    <div class="dash-meter__fill" data-meter-fill data-meter-target="0.88"></div>
+                  </div>
+                </article>
+                <article class="dash-companies__tile glass-panel glass-panel--inset">
+                  <header>
+                    <div class="dash-companies__logo dash-companies__logo--alt" aria-hidden="true">A</div>
+                    <div>
+                      <h4 class="dash-companies__name">Atlas Labs</h4>
+                      <p class="muted small">Group PM · B2B platform</p>
+                    </div>
+                  </header>
+                  <div class="dash-companies__row muted small"><span>Readiness</span><span>Emerging</span></div>
+                  <div class="dash-meter dash-meter--thin">
+                    <div class="dash-meter__fill dash-meter__fill--violet" data-meter-fill data-meter-target="0.52"></div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <!-- 6. Missing skills -->
+            <section class="dash-card glass-panel glass-panel--elevated" id="missing-skills" data-dash-animate>
+              <div class="dash-card__head">
+                <div>
+                  <h3 class="dash-card__title">Missing skills</h3>
+                  <p class="dash-card__desc muted small">Prioritized by impact on your next offer.</p>
+                </div>
+                <button type="button" class="btn btn--primary btn--sm">Generate plan</button>
+              </div>
+              <ul class="dash-gaps">
+                <li class="dash-gaps__item">
+                  <div class="dash-gaps__meta">
+                    <span class="dash-gaps__name">Distributed systems intuition</span>
+                    <span class="dash-gap-pill dash-gap-pill--high">High impact</span>
+                  </div>
+                  <div class="dash-meter">
+                    <div class="dash-meter__fill dash-meter__fill--violet" data-meter-fill data-meter-target="0.35"></div>
+                  </div>
+                  <span class="muted mono small">Suggested · workshop + shipped note</span>
+                </li>
+                <li class="dash-gaps__item">
+                  <div class="dash-gaps__meta">
+                    <span class="dash-gaps__name">Executive storytelling</span>
+                    <span class="dash-gap-pill">Medium impact</span>
+                  </div>
+                  <div class="dash-meter">
+                    <div class="dash-meter__fill dash-meter__fill--blue" data-meter-fill data-meter-target="0.48"></div>
+                  </div>
+                  <span class="muted mono small">Suggested · drills + teardown</span>
+                </li>
+                <li class="dash-gaps__item">
+                  <div class="dash-gaps__meta">
+                    <span class="dash-gaps__name">Technical depth — API platforms</span>
+                    <span class="dash-gap-pill dash-gap-pill--muted">Steady</span>
+                  </div>
+                  <div class="dash-meter">
+                    <div class="dash-meter__fill" data-meter-fill data-meter-target="0.61"></div>
+                  </div>
+                  <span class="muted mono small">Suggested · pairing + doc critique</span>
+                </li>
+              </ul>
+            </section>
+
+            <!-- 8. Documents -->
+            <section class="dash-card glass-panel glass-panel--elevated dash-card--documents" id="documents" data-dash-animate>
+              <div class="dash-card__head">
+                <div>
+                  <h3 class="dash-card__title">Uploaded documents</h3>
+                  <p class="dash-card__desc muted small">Versioned uploads &amp; AI annotations.</p>
+                </div>
+                <a href="resume-upload.html" class="btn btn--ghost btn--sm">Upload</a>
+              </div>
+              <div class="dash-docs">
+                <div class="dash-docs__row dash-docs__row--header muted mono small">
+                  <span>Document</span>
+                  <span>ATS</span>
+                  <span>Updated</span>
+                </div>
+                <article class="dash-docs__row">
+                  <div class="dash-docs__file">
+                    <span class="dash-docs__icon">PDF</span>
+                    <div>
+                      <p class="dash-docs__name">Resume_PM_Core_v12.pdf</p>
+                      <p class="muted small">820 KB · Primary profile</p>
+                    </div>
+                  </div>
+                  <span class="dash-docs__badge">86</span>
+                  <span class="mono muted small">Today</span>
+                </article>
+                <article class="dash-docs__row">
+                  <div class="dash-docs__file">
+                    <span class="dash-docs__icon dash-docs__icon--alt">PNG</span>
+                    <div>
+                      <p class="dash-docs__name">portfolio_grid.png</p>
+                      <p class="muted small">Vision doc · appendix</p>
+                    </div>
+                  </div>
+                  <span class="dash-docs__badge dash-docs__badge--muted">—</span>
+                  <span class="mono muted small">May 09</span>
+                </article>
+                <article class="dash-docs__row">
+                  <div class="dash-docs__file">
+                    <span class="dash-docs__icon">TXT</span>
+                    <div>
+                      <p class="dash-docs__name">achievement_log.txt</p>
+                      <p class="muted small">Fed into roadmap model</p>
+                    </div>
+                  </div>
+                  <span class="dash-docs__badge">—</span>
+                  <span class="mono muted small">Apr 29</span>
+                </article>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>

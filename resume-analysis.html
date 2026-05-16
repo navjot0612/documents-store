@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume analysis — CareerOS</title>
+    <meta
+      name="description"
+      content="AI-powered ATS breakdown, gaps, roadmap, and interview readiness for your resume."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="resume-analysis.css" />
+  </head>
+  <body class="ra-body">
+    <div class="ambient" aria-hidden="true">
+      <div class="orb orb--1"></div>
+      <div class="orb orb--2"></div>
+      <div class="orb orb--3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <header class="ra-top glass-panel glass-panel--elevated">
+      <div class="ra-top__inner">
+        <div class="ra-top__brand">
+          <a href="index.html" class="logo">
+            <span class="logo__mark logo__mark--sm" aria-hidden="true"></span>
+            CareerOS
+          </a>
+          <span class="ra-chip ra-chip--ai mono">resume lab</span>
+        </div>
+        <nav class="ra-nav" aria-label="Report sections">
+          <a href="#ats">ATS</a>
+          <a href="#insights">Signals</a>
+          <a href="#gaps">Gaps</a>
+          <a href="#projects">Projects</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#interview">Interview</a>
+        </nav>
+        <div class="ra-top__actions">
+          <a href="resume-upload.html" class="btn btn--ghost btn--sm">Re-upload</a>
+          <a href="dashboard.html" class="btn btn--primary btn--sm">Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="ra-main">
+      <section class="ra-hero glass-panel glass-panel--elevated ra-animate">
+        <div class="ra-hero__intro">
+          <p class="ra-eyebrow">
+            <span class="ra-eyebrow__dot"></span>
+            AI resume analysis · demo report
+          </p>
+          <h1 class="ra-hero__title">Signal map for your <span class="gradient-text">resume</span></h1>
+          <p class="muted ra-hero__lead">
+            Ingest artifact <span class="mono">Resume_PM_Core_v12.pdf</span> · last model pass 26 min ago
+          </p>
+        </div>
+        <div class="ra-hero__scores">
+          <!-- ATS meter -->
+          <div class="ra-ring-card glass-panel glass-panel--inset" id="ats" data-ra-anchor>
+            <h2 class="ra-card-title">ATS score</h2>
+            <p class="muted small ra-card-desc">-parser + JD alignment sandbox</p>
+            <div
+              class="ra-ring"
+              data-ra-ring
+              data-pct="86"
+              aria-label="ATS score 86 of 100"
+            >
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <linearGradient id="raRingAts" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#6ea8ff" />
+                    <stop offset="100%" stop-color="#7c5cff" />
+                  </linearGradient>
+                </defs>
+                <circle class="ra-ring__track" cx="60" cy="60" r="52" />
+                <circle class="ra-ring__fill ra-ring__fill--ats" cx="60" cy="60" r="52" />
+              </svg>
+              <div class="ra-ring__center">
+                <span class="ra-ring__num" data-ra-ring-display>86</span>
+                <span class="muted mono small">/100</span>
+              </div>
+            </div>
+          </div>
+          <!-- Interview readiness -->
+          <div class="ra-ring-card glass-panel glass-panel--inset" id="interview" data-ra-anchor>
+            <h2 class="ra-card-title">Interview readiness</h2>
+            <p class="muted small ra-card-desc">confidence index from evidence density</p>
+            <div
+              class="ra-ring"
+              data-ra-ring
+              data-pct="72"
+              aria-label="Interview readiness 72 percent"
+            >
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <linearGradient id="raRingInt" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#b794f6" />
+                    <stop offset="100%" stop-color="#6ea8ff" />
+                  </linearGradient>
+                </defs>
+                <circle class="ra-ring__track" cx="60" cy="60" r="52" />
+                <circle class="ra-ring__fill ra-ring__fill--int" cx="60" cy="60" r="52" />
+              </svg>
+              <div class="ra-ring__center">
+                <span class="ra-ring__num" data-ra-ring-display>72</span>
+                <span class="muted mono small">%</span>
+              </div>
+            </div>
+            <ul class="ra-bullet-list muted small ra-int-bullets">
+              <li>STAR stories detected: <strong class="mono" style="color: var(--text)">3 strong</strong></li>
+              <li>Add 2 behavioral anchors for Staff loop</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Charts -->
+      <section class="ra-card glass-panel glass-panel--elevated ra-animate ra-chart-section" id="insights">
+        <div class="ra-card-head">
+          <div>
+            <h2 class="ra-section-title">Multi-axis signal decomposition</h2>
+            <p class="muted small">Compared to calibrated hire bar for Staff PM archetype.</p>
+          </div>
+          <div class="ra-pill-row">
+            <span class="ra-chip">Archetype</span>
+            <span class="ra-chip ra-chip--ghost">Confidence 0.91</span>
+          </div>
+        </div>
+        <div class="ra-chart-grid">
+          <div class="ra-chart-panel">
+            <canvas id="raRadarChart" aria-label="Radar chart resume dimensions"></canvas>
+          </div>
+          <div class="ra-chart-panel">
+            <canvas id="raBarChart" aria-label="Bar chart ATS factor weights"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Strengths + Weaknesses -->
+      <div class="ra-split" id="strengths-weak">
+        <section class="ra-card glass-panel ra-animate" id="strengths">
+          <h2 class="ra-section-title">Strengths</h2>
+          <p class="muted small ra-mb">What hiring models weight positively today.</p>
+          <ul class="ra-factor-list">
+            <li class="ra-factor ra-factor--up">
+              <span class="ra-factor__tag">Executive narrative</span>
+              <p>Concise storyline from scope → outcome with repeated north-star KPIs.</p>
+            </li>
+            <li class="ra-factor ra-factor--up">
+              <span class="ra-factor__tag">Cross-org influence</span>
+              <p>Multiple stakeholders named with decision velocity language.</p>
+            </li>
+            <li class="ra-factor ra-factor--up">
+              <span class="ra-factor__tag">Growth arc</span>
+              <p>Clear promotions tied to launches; reads as succession-ready Sr IC path.</p>
+            </li>
+          </ul>
+        </section>
+        <section class="ra-card glass-panel ra-animate" id="weaknesses">
+          <h2 class="ra-section-title">Weaknesses</h2>
+          <p class="muted small ra-mb">Friction points surfaced by ATS + interviewer sim.</p>
+          <ul class="ra-factor-list">
+            <li class="ra-factor ra-factor--dn">
+              <span class="ra-factor__tag">Quantified infra depth</span>
+              <p>Light on systems scale numbers (QPS, cost, latency) vs. archetype norms.</p>
+            </li>
+            <li class="ra-factor ra-factor--dn">
+              <span class="ra-factor__tag">Role taxonomy drift</span>
+              <p>Title stack slightly misaligned with target JD ontology (“Group PM”).</p>
+            </li>
+            <li class="ra-factor ra-factor--dn">
+              <span class="ra-factor__tag">Certifications</span>
+              <p>Optional signals missing for regulated-industry funnel you selected.</p>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- Missing skills -->
+      <section class="ra-card glass-panel glass-panel--elevated ra-animate" id="gaps">
+        <div class="ra-card-head">
+          <div>
+            <h2 class="ra-section-title">Missing skills · priority weighted</h2>
+            <p class="muted small">AI-ranked by impact × time-to-demonstrability.</p>
+          </div>
+        </div>
+        <div class="ra-skills-grid">
+          <div class="ra-skill-meter" data-ra-meter>
+            <div class="ra-skill-meter__top">
+              <span class="muted">Platform API intuition</span>
+              <strong class="mono ra-skill-pct">0%</strong>
+            </div>
+            <div class="ra-meter-track">
+              <div class="ra-meter-fill ra-meter-fill--a" data-target="38"></div>
+            </div>
+          </div>
+          <div class="ra-skill-meter" data-ra-meter>
+            <div class="ra-skill-meter__top">
+              <span class="muted">Fleet reliability storytelling</span>
+              <strong class="mono ra-skill-pct">0%</strong>
+            </div>
+            <div class="ra-meter-track">
+              <div class="ra-meter-fill ra-meter-fill--b" data-target="55"></div>
+            </div>
+          </div>
+          <div class="ra-skill-meter" data-ra-meter>
+            <div class="ra-skill-meter__top">
+              <span class="muted">Economic modeling</span>
+              <strong class="mono ra-skill-pct">0%</strong>
+            </div>
+            <div class="ra-meter-track">
+              <div class="ra-meter-fill ra-meter-fill--c" data-target="48"></div>
+            </div>
+          </div>
+          <div class="ra-skill-meter" data-ra-meter>
+            <div class="ra-skill-meter__top">
+              <span class="muted">Leadership council presence</span>
+              <strong class="mono ra-skill-pct">0%</strong>
+            </div>
+            <div class="ra-meter-track">
+              <div class="ra-meter-fill ra-meter-fill--d" data-target="71"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section class="ra-card glass-panel glass-panel--elevated ra-animate" id="projects">
+        <div class="ra-card-head">
+          <div>
+            <h2 class="ra-section-title">Recommended projects</h2>
+            <p class="muted small">Close your highest-leverage gaps in 90 days.</p>
+          </div>
+        </div>
+        <div class="ra-projects">
+          <article class="ra-project glass-panel glass-panel--inset">
+            <header>
+              <span class="ra-project__badge mono">Impact</span>
+              <h3 class="ra-project__title">0→1 KPI dashboard</h3>
+            </header>
+            <p class="muted small">Publish a bilingual doc with weekly adoption + revenue uplift math.</p>
+            <footer class="ra-project__foot muted mono small">2 wks · portfolio artifact</footer>
+          </article>
+          <article class="ra-project glass-panel glass-panel--inset">
+            <header>
+              <span class="ra-project__badge ra-project__badge--vio mono">Depth</span>
+              <h3 class="ra-project__title">API failure-mode writeup</h3>
+            </header>
+            <p class="muted small">Redact client data; annotate incident graph + SLA tradeoffs.</p>
+            <footer class="ra-project__foot muted mono small">12–16 hrs · technical memo</footer>
+          </article>
+          <article class="ra-project glass-panel glass-panel--inset">
+            <header>
+              <span class="ra-project__badge ra-project__badge--grn mono">Signal</span>
+              <h3 class="ra-project__title">Customer council narrative</h3>
+            </header>
+            <p class="muted small">Record 90-sec loom with verbatim quotes powering roadmap.</p>
+            <footer class="ra-project__foot muted mono small">Evidence pack · interview STAR</footer>
+          </article>
+        </div>
+      </section>
+
+      <!-- Roadmap -->
+      <section class="ra-card glass-panel glass-panel--elevated ra-animate" id="roadmap">
+        <div class="ra-card-head">
+          <div>
+            <h2 class="ra-section-title">Career improvement roadmap</h2>
+            <p class="muted small">Phased deltas derived from ATS + interviewer alignment.</p>
+          </div>
+        </div>
+        <div class="ra-roadmap">
+          <div class="ra-road-step ra-road-step--done" data-ra-step>
+            <div class="ra-road-dot" aria-hidden="true"></div>
+            <div>
+              <h3 class="ra-road-title">Stabilize keyword spine</h3>
+              <p class="muted small">Align titles + skills spine to Nebula archetype ontology.</p>
+              <div class="ra-micro-meter">
+                <div class="ra-micro-meter__fill" data-wp="100"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ra-road-step" data-ra-step>
+            <div class="ra-road-dot" aria-hidden="true"></div>
+            <div>
+              <h3 class="ra-road-title">Inject infra proof points</h3>
+              <p class="muted small">Add two quant bullets with SLA / cost deltas.</p>
+              <div class="ra-micro-meter">
+                <div class="ra-micro-meter__fill" data-wp="62"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ra-road-step" data-ra-step>
+            <div class="ra-road-dot" aria-hidden="true"></div>
+            <div>
+              <h3 class="ra-road-title">Behavioral backlog</h3>
+              <p class="muted small">Script 4 STAR arcs mapped to HM rubric pillars.</p>
+              <div class="ra-micro-meter">
+                <div class="ra-micro-meter__fill" data-wp="28"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ra-road-step" data-ra-step>
+            <div class="ra-road-dot" aria-hidden="true"></div>
+            <div>
+              <h3 class="ra-road-title">Interview dry-run</h3>
+              <p class="muted small">Sim Staff loop with AI interviewer + reviewer notes.</p>
+              <div class="ra-micro-meter">
+                <div class="ra-micro-meter__fill" data-wp="0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="ra-foot muted small mono">
+      <div class="ra-foot__inner">
+        <span>CareerOS intelligence · illustrative analysis</span>
+        <span class="ra-foot__gap">··</span>
+        <a href="resume-upload.html">New upload</a>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="resume-analysis.js"></script>
+  </body>
+</html>

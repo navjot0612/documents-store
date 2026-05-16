@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload resume — CareerOS</title>
+    <meta name="description" content="Upload your resume for AI-powered ATS scoring and career insights." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="auth.css" />
+    <link rel="stylesheet" href="resume-upload.css" />
+  </head>
+  <body class="page-auth page-resume">
+    <div class="auth-backdrop" aria-hidden="true">
+      <div class="auth-gradient"></div>
+      <div class="auth-orb auth-orb--1"></div>
+      <div class="auth-orb auth-orb--2"></div>
+      <div class="auth-orb auth-orb--3"></div>
+      <div class="auth-grid"></div>
+    </div>
+
+    <header class="auth-top resume-head">
+      <a href="dashboard.html" class="logo">
+        <span class="logo__mark logo__mark--sm" aria-hidden="true"></span>
+        CareerOS
+      </a>
+      <a href="dashboard.html" class="auth-back-link">← Workspace</a>
+    </header>
+
+    <main class="resume-main">
+      <header class="resume-hero">
+        <p class="resume-eyebrow">
+          <span class="resume-eyebrow__dot" aria-hidden="true"></span>
+          Resume intelligence
+        </p>
+        <h1 class="resume-title">Upload your <span class="gradient-text">resume</span></h1>
+        <p class="resume-lead muted">
+          PDF or DOCX up to 15 MB. We’ll parse structure, score ATS fit, and map skills to your roadmap.
+        </p>
+      </header>
+
+      <div class="resume-bento">
+        <!-- Upload column -->
+        <section class="resume-panel glass-panel glass-panel--elevated" aria-labelledby="upload-heading">
+          <div class="resume-panel__head">
+            <h2 id="upload-heading" class="resume-panel__title">Import</h2>
+            <span class="resume-chip resume-chip--muted mono">Secure · encrypted</span>
+          </div>
+
+          <div
+            id="dropZone"
+            class="resume-dropzone"
+            tabindex="0"
+            role="button"
+            aria-label="Upload resume. Drop a file or click to browse."
+          >
+            <input
+              id="fileInput"
+              class="resume-file-input"
+              type="file"
+              accept=".pdf,.doc,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword"
+              aria-hidden="true"
+            />
+            <div class="resume-dropzone__glow" aria-hidden="true"></div>
+            <div class="resume-dropzone__inner">
+              <div class="resume-dropzone__icon" aria-hidden="true">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 15V3m0 0l4 4m-4-4L8 7M4 21h16"
+                    stroke="url(#resumeUp)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <defs>
+                    <linearGradient id="resumeUp" x1="8" y1="3" x2="18" y2="17" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#6ea8ff" />
+                      <stop offset="1" stop-color="#b794f6" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <p class="resume-dropzone__strong">Drop resume here</p>
+              <p class="resume-dropzone__hint muted small">or click to browse · PDF, DOCX</p>
+            </div>
+          </div>
+
+          <p id="fileError" class="resume-error" role="alert" hidden></p>
+
+          <!-- Upload progress -->
+          <div id="uploadProgress" class="resume-progress" hidden data-resume-section="upload-progress">
+            <div class="resume-progress__row">
+              <span class="muted small">Uploading snapshot</span>
+              <span id="uploadPercent" class="mono resume-progress__pct">0%</span>
+            </div>
+            <div class="resume-progress__track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <div id="uploadBar" class="resume-progress__fill"></div>
+            </div>
+          </div>
+
+          <!-- AI analyzing -->
+          <div id="aiBlock" class="resume-ai" hidden data-resume-section="analyzing">
+            <div class="resume-ai__header">
+              <div class="resume-ai__chip" aria-hidden="true">
+                <span class="resume-ai__pulse"></span>
+                <span class="mono small">AI analyzer</span>
+              </div>
+              <p id="aiStatus" class="resume-ai__status muted small">Initializing models…</p>
+            </div>
+            <div class="resume-ai__scan" aria-hidden="true">
+              <div class="resume-ai__lines"></div>
+              <div class="resume-ai__beam"></div>
+            </div>
+            <ul id="aiHints" class="resume-ai__hints mono small muted" aria-live="polite"></ul>
+          </div>
+
+          <div class="resume-actions">
+            <button type="button" id="analyzeBtn" class="btn btn--primary btn--lg btn--block" disabled>
+              <span class="resume-btn__label">Analyze resume</span>
+              <span id="analyzeSpinner" class="resume-btn__spinner" aria-hidden="true" hidden></span>
+            </button>
+            <button type="button" id="resetBtn" class="btn btn--ghost btn--block resume-reset" hidden>
+              Upload another file
+            </button>
+          </div>
+
+          <!-- Success -->
+          <div id="successBanner" class="resume-success" hidden data-resume-section="success">
+            <div class="resume-success__icon" aria-hidden="true">✓</div>
+            <div>
+              <p class="resume-success__title">Analysis complete</p>
+              <p class="resume-success__desc muted small">
+                Insights are synced to your CareerOS workspace. Open the dashboard for next steps.
+              </p>
+              <div class="resume-success__cta">
+                <a href="resume-analysis.html" class="btn btn--ghost btn--sm">Full analysis dashboard</a>
+                <a href="dashboard.html" class="btn btn--primary btn--sm resume-success__dash">View workspace</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Preview + score column -->
+        <div class="resume-side">
+          <section
+            id="previewSection"
+            class="resume-panel resume-panel--tight glass-panel"
+            aria-labelledby="preview-heading"
+            data-resume-preview
+            hidden
+          >
+            <h2 id="preview-heading" class="resume-panel__title">Uploaded resume preview</h2>
+            <div class="resume-preview">
+              <div class="resume-preview__doc" aria-hidden="true">
+                <div class="resume-preview__bar"></div>
+                <div class="resume-preview__bar resume-preview__bar--short"></div>
+                <div class="resume-preview__bar resume-preview__bar--mid"></div>
+                <div class="resume-preview__bar"></div>
+                <div class="resume-preview__bar resume-preview__bar--tiny"></div>
+              </div>
+              <div class="resume-preview__meta">
+                <span id="previewKind" class="resume-preview__badge mono">PDF</span>
+                <p id="previewName" class="resume-preview__name">—</p>
+                <p id="previewSize" class="resume-preview__size muted mono small">—</p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="scoreSection"
+            class="resume-panel glass-panel glass-panel--elevated resume-score-section"
+            aria-labelledby="score-heading"
+            data-resume-score
+          >
+            <h2 id="score-heading" class="resume-panel__title">Resume score</h2>
+            <p class="resume-panel__subtitle muted small">ATS readiness + structure quality (demo)</p>
+
+            <div class="resume-score" data-state="empty">
+              <div class="resume-score__empty muted small" data-score-empty>
+                Run analysis to generate your score and keyword coverage.
+              </div>
+              <div class="resume-score__result" data-score-result hidden>
+                <div class="resume-score__ring" aria-label="Resume score">
+                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="resumeRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#6ea8ff" />
+                        <stop offset="100%" stop-color="#b794f6" />
+                      </linearGradient>
+                    </defs>
+                    <circle class="resume-score__track" cx="60" cy="60" r="50" />
+                    <circle id="scoreRingFill" class="resume-score__fill" cx="60" cy="60" r="50" />
+                  </svg>
+                  <div class="resume-score__center">
+                    <span id="scoreNum" class="resume-score__num">—</span>
+                    <span class="resume-score__of muted mono small">ATS</span>
+                  </div>
+                </div>
+                <div class="resume-score__bars">
+                  <div class="resume-score-row">
+                    <span class="muted small">Keywords</span>
+                    <strong id="barKw" class="mono">—</strong>
+                  </div>
+                  <div class="resume-mini-meter">
+                    <div id="meterKw" class="resume-mini-meter__fill" style="--m: 0"></div>
+                  </div>
+                  <div class="resume-score-row">
+                    <span class="muted small">Structure</span>
+                    <strong id="barStruct" class="mono">—</strong>
+                  </div>
+                  <div class="resume-mini-meter">
+                    <div id="meterStruct" class="resume-mini-meter__fill resume-mini-meter__fill--alt" style="--m: 0"></div>
+                  </div>
+                  <div class="resume-score-row">
+                    <span class="muted small">Impact lines</span>
+                    <strong id="barImpact" class="mono">—</strong>
+                  </div>
+                  <div class="resume-mini-meter">
+                    <div id="meterImpact" class="resume-mini-meter__fill resume-mini-meter__fill--vi" style="--m: 0"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script src="resume-upload.js"></script>
+  </body>
+</html>
