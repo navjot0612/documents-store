@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dream Company Roadmap — CareerOS</title>
+  <meta name="description" content="AI-powered roadmap to land your dream role at top tech companies." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="dream-company.css" />
+</head>
+
+<body class="dc-body">
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb--1"></div>
+    <div class="orb orb--2"></div>
+    <div class="orb orb--3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <header class="dc-top glass-panel glass-panel--elevated">
+    <div class="dc-top__inner">
+      <div class="dc-top__brand">
+        <a href="index.html" class="logo">
+          <span class="logo__mark logo__mark--sm" aria-hidden="true"></span>
+          CareerOS
+        </a>
+        <span class="dc-chip dc-chip--ai mono">Pathfinder</span>
+      </div>
+      <nav class="dc-nav" aria-label="Page sections">
+        <a href="#target">Target</a>
+        <a href="#readiness">Readiness</a>
+        <a href="#skills">Skill Gap</a>
+        <a href="#roadmap">Timeline</a>
+        <a href="#tech">Tech & Certs</a>
+      </nav>
+      <div class="dc-top__actions">
+        <a href="dashboard.html" class="btn btn--ghost btn--sm">Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="dc-main">
+    <!-- Target Selector Hero -->
+    <section class="dc-hero glass-panel glass-panel--elevated dc-animate" id="target">
+      <div class="dc-hero__content">
+        <p class="dc-eyebrow">
+          <span class="dc-eyebrow__dot"></span>
+          AI Pathfinder Simulation
+        </p>
+        <h1 class="dc-hero__title">Route to <span class="gradient-text">Dream Role</span></h1>
+        <p class="muted dc-hero__lead">
+          Calibrated against recent hiring data, technical loops, and successful candidate profiles.
+        </p>
+
+        <div class="dc-selectors">
+          <div class="dc-select-group">
+            <label for="companySelect" class="dc-select-label">Target Company</label>
+            <div class="dc-select-wrapper">
+              <select id="companySelect" class="dc-select">
+                <option value="google">Google</option>
+                <option value="meta">Meta</option>
+                <option value="amazon">Amazon</option>
+                <option value="netflix">Netflix</option>
+                <option value="apple">Apple</option>
+                <option value="openai">OpenAI</option>
+              </select>
+              <div class="dc-select-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="dc-select-group">
+            <label for="roleSelect" class="dc-select-label">Target Role</label>
+            <div class="dc-select-wrapper">
+              <select id="roleSelect" class="dc-select">
+                <option value="backend">Backend Developer (L4)</option>
+                <option value="frontend">Frontend Engineer (L4)</option>
+                <option value="fullstack">Fullstack Developer (L5)</option>
+                <option value="ml">Machine Learning Engineer</option>
+                <option value="data">Data Scientist</option>
+                <option value="pm">Product Manager</option>
+              </select>
+              <div class="dc-select-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn--primary dc-btn-simulate" id="simulateBtn">Run Simulation</button>
+        </div>
+      </div>
+
+      <!-- Readiness Ring -->
+      <div class="dc-readiness glass-panel glass-panel--inset" id="readiness">
+        <h2 class="dc-card-title">Estimated Readiness</h2>
+        <p class="muted small dc-card-desc">Based on your current profile</p>
+        <div class="dc-ring" data-dc-ring data-pct="42">
+          <svg viewBox="0 0 160 160" aria-hidden="true">
+            <defs>
+              <linearGradient id="dcRingGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff4d4d" />
+                <stop offset="50%" stop-color="#f9cb28" />
+                <stop offset="100%" stop-color="#00f2fe" />
+              </linearGradient>
+            </defs>
+            <circle class="dc-ring__track" cx="80" cy="80" r="70" />
+            <circle class="dc-ring__fill" cx="80" cy="80" r="70" />
+          </svg>
+          <div class="dc-ring__center">
+            <span class="dc-ring__num" id="readinessNum">42</span>
+            <span class="muted mono small">%</span>
+          </div>
+        </div>
+        <div class="dc-readiness-stats">
+          <div class="dc-stat">
+            <span class="dc-stat-label">Timeline</span>
+            <span class="dc-stat-val mono">6-8 mos</span>
+          </div>
+          <div class="dc-stat">
+            <span class="dc-stat-label">Competition</span>
+            <span class="dc-stat-val mono">High</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skill Gap Analysis -->
+    <section class="dc-section dc-animate" id="skills">
+      <div class="dc-section-head">
+        <h2 class="dc-section-title">Skill Gap Analysis</h2>
+        <p class="muted">Where you stand versus the Google Backend Developer hiring bar.</p>
+      </div>
+
+      <div class="dc-gap-grid">
+        <div class="dc-chart-card glass-panel glass-panel--elevated">
+          <h3 class="dc-card-title">Core Competencies</h3>
+          <div class="dc-chart-container">
+            <canvas id="competencyChart"></canvas>
+          </div>
+        </div>
+
+        <div class="dc-gaps-list glass-panel glass-panel--elevated">
+          <h3 class="dc-card-title">Critical Gaps</h3>
+          <div class="dc-gap-items">
+            <div class="dc-gap-item">
+              <div class="dc-gap-header">
+                <span class="dc-gap-name">Distributed Systems Design</span>
+                <span class="dc-gap-badge dc-gap-badge--high mono">High Priority</span>
+              </div>
+              <div class="dc-meter">
+                <div class="dc-meter-fill" style="width: 20%; background: #ff4d4d;"></div>
+              </div>
+              <p class="muted small">Lacking experience in partitioning, consensus algorithms, and high-availability
+                architecture.</p>
+            </div>
+
+            <div class="dc-gap-item">
+              <div class="dc-gap-header">
+                <span class="dc-gap-name">Advanced Data Structures</span>
+                <span class="dc-gap-badge dc-gap-badge--med mono">Med Priority</span>
+              </div>
+              <div class="dc-meter">
+                <div class="dc-meter-fill" style="width: 45%; background: #f9cb28;"></div>
+              </div>
+              <p class="muted small">Need deeper intuition for graph traversal, dynamic programming, and memory
+                optimization.</p>
+            </div>
+
+            <div class="dc-gap-item">
+              <div class="dc-gap-header">
+                <span class="dc-gap-name">Go / C++ Proficiency</span>
+                <span class="dc-gap-badge dc-gap-badge--med mono">Med Priority</span>
+              </div>
+              <div class="dc-meter">
+                <div class="dc-meter-fill" style="width: 30%; background: #f9cb28;"></div>
+              </div>
+              <p class="muted small">Google relies heavily on Go and C++ for backend services. Python alone is
+                insufficient.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap Timeline -->
+    <section class="dc-section dc-animate" id="roadmap">
+      <div class="dc-section-head">
+        <h2 class="dc-section-title">Action Plan Timeline</h2>
+        <p class="muted">A chronologically optimized learning and execution path.</p>
+      </div>
+
+      <div class="dc-timeline glass-panel glass-panel--elevated">
+        <div class="dc-timeline-line"></div>
+
+        <div class="dc-timeline-node">
+          <div class="dc-timeline-dot dc-timeline-dot--done" style="background: linear-gradient(145deg, #34d399, #10b981); color: #000; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(52, 211, 153, 0.4);">
+            <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="dc-timeline-content glass-panel glass-panel--inset" style="border-left: 3px solid #34d399;">
+            <span class="dc-timeline-date mono" style="color: #34d399;">Step 1 · Complete</span>
+            <h3 class="dc-timeline-title">Learn JavaScript</h3>
+            <p class="muted small">Master ES6+, closures, async/await, and DOM manipulation.</p>
+          </div>
+        </div>
+
+        <div class="dc-timeline-node">
+          <div class="dc-timeline-dot dc-timeline-dot--done" style="background: linear-gradient(145deg, #34d399, #10b981); color: #000; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(52, 211, 153, 0.4);">
+            <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="dc-timeline-content glass-panel glass-panel--inset" style="border-left: 3px solid #34d399;">
+            <span class="dc-timeline-date mono" style="color: #34d399;">Step 2 · Complete</span>
+            <h3 class="dc-timeline-title">Build 2 Frontend Projects</h3>
+            <p class="muted small">Develop a React portfolio and a complex state-driven web app.</p>
+          </div>
+        </div>
+
+        <div class="dc-timeline-node">
+          <div class="dc-timeline-dot dc-timeline-dot--active" style="box-shadow: 0 0 0 4px rgba(110, 168, 255, 0.2), 0 0 20px rgba(110, 168, 255, 0.6); display: flex; align-items: center; justify-content: center; color: #fff;">
+            <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" fill="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"></circle></svg>
+          </div>
+          <div class="dc-timeline-content glass-panel glass-panel--inset" style="border-left: 3px solid #6ea8ff; transform: scale(1.02); background: linear-gradient(145deg, rgba(110, 168, 255, 0.1), transparent);">
+            <span class="dc-timeline-date mono" style="color: #6ea8ff;">Step 3 · In Progress</span>
+            <h3 class="dc-timeline-title">Learn Backend (Node.js)</h3>
+            <p class="muted small" style="color: rgba(226, 232, 255, 0.9);">Understand REST APIs, Express.js, and database integrations (MongoDB/PostgreSQL).</p>
+          </div>
+        </div>
+
+        <div class="dc-timeline-node">
+          <div class="dc-timeline-dot"></div>
+          <div class="dc-timeline-content glass-panel glass-panel--inset">
+            <span class="dc-timeline-date mono">Step 4 · Upcoming</span>
+            <h3 class="dc-timeline-title">Build Full-Stack Project</h3>
+            <p class="muted small">Deploy a complete MERN stack application with authentication and CI/CD.</p>
+          </div>
+        </div>
+
+        <div class="dc-timeline-node">
+          <div class="dc-timeline-dot dc-timeline-dot--final"></div>
+          <div class="dc-timeline-content glass-panel glass-panel--inset" style="border-right: 3px solid #b794f6;">
+            <span class="dc-timeline-date mono" style="color: #b794f6;">Step 5 · Goal</span>
+            <h3 class="dc-timeline-title">Apply for Internships</h3>
+            <p class="muted small">Optimize resume for ATS and aggressively apply to junior/intern roles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech & Certs -->
+    <section class="dc-section dc-animate" id="tech">
+      <div class="dc-split">
+
+        <!-- Recommended Tech -->
+        <div class="dc-card glass-panel glass-panel--elevated">
+          <h2 class="dc-section-title">Essential Technologies</h2>
+          <p class="muted small dc-mb">Tech stack required for Backend at Google.</p>
+          <div class="dc-tech-grid">
+            <div class="dc-tech-item glass-panel glass-panel--inset">
+              <div class="dc-tech-logo" style="background: rgba(0, 173, 216, 0.15); color: #00add8;">Go</div>
+              <span class="dc-tech-name">Golang</span>
+            </div>
+            <div class="dc-tech-item glass-panel glass-panel--inset">
+              <div class="dc-tech-logo" style="background: rgba(101, 154, 210, 0.15); color: #659ad2;">C++</div>
+              <span class="dc-tech-name">C++</span>
+            </div>
+            <div class="dc-tech-item glass-panel glass-panel--inset">
+              <div class="dc-tech-logo" style="background: rgba(50, 108, 229, 0.15); color: #326ce5;">k8s</div>
+              <span class="dc-tech-name">Kubernetes</span>
+            </div>
+            <div class="dc-tech-item glass-panel glass-panel--inset">
+              <div class="dc-tech-logo" style="background: rgba(230, 82, 44, 0.15); color: #e6522c;">gRPC</div>
+              <span class="dc-tech-name">gRPC / Protobuf</span>
+            </div>
+            <div class="dc-tech-item glass-panel glass-panel--inset">
+              <div class="dc-tech-logo" style="background: rgba(234, 40, 69, 0.15); color: #ea2845;">Redis</div>
+              <span class="dc-tech-name">Redis</span>
+            </div>
+            <div class="dc-tech-item glass-panel glass-panel--inset">
+              <div class="dc-tech-logo" style="background: rgba(66, 133, 244, 0.15); color: #4285F4;">GCP</div>
+              <span class="dc-tech-name">GCP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="dc-card glass-panel glass-panel--elevated">
+          <h2 class="dc-section-title">Recommended Certifications</h2>
+          <p class="muted small dc-mb">Signals that bypass ATS filters and establish authority.</p>
+          <div class="dc-cert-list">
+            <div class="dc-cert-item glass-panel glass-panel--inset">
+              <div class="dc-cert-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <div class="dc-cert-info">
+                <h4 class="dc-cert-name">Google Cloud Professional Cloud Architect</h4>
+                <p class="muted small mono">High Signal · ~40 hrs prep</p>
+              </div>
+            </div>
+
+            <div class="dc-cert-item glass-panel glass-panel--inset">
+              <div class="dc-cert-icon" style="color: #326ce5;">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div class="dc-cert-info">
+                <h4 class="dc-cert-name">Certified Kubernetes Administrator (CKA)</h4>
+                <p class="muted small mono">Medium Signal · ~60 hrs prep</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="dc-foot muted small mono">
+    <div class="dc-foot__inner">
+      <span>CareerOS intelligence · Path simulation engine</span>
+      <span class="dc-foot__gap">··</span>
+      <a href="dashboard.html">Back to Dashboard</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="dream-company.js"></script>
+</body>
+
+</html>

@@ -66,7 +66,7 @@
           </a>
 
           <span class="dash-nav__label dash-nav__label--gap">Growth</span>
-          <a class="dash-nav__link" href="#dream-company">
+          <a class="dash-nav__link" href="dream-company.html">
             <span class="dash-nav__ico" aria-hidden="true"></span>
             Dream companies
           </a>
@@ -76,13 +76,17 @@
           </a>
 
           <span class="dash-nav__label dash-nav__label--gap">Productivity</span>
-          <a class="dash-nav__link" href="#reminders">
+          <a class="dash-nav__link" href="reminders.html">
             <span class="dash-nav__ico" aria-hidden="true"></span>
             Reminders
           </a>
           <a class="dash-nav__link" href="#documents">
             <span class="dash-nav__ico" aria-hidden="true"></span>
             Documents
+          </a>
+          <a class="dash-nav__link" href="settings.html">
+            <span class="dash-nav__ico" aria-hidden="true"></span>
+            Settings
           </a>
         </nav>
 
@@ -139,13 +143,13 @@
                 />
               </svg>
             </button>
-            <div class="dash-user" aria-label="Signed in as Alex Morgan, Pro tier">
+            <a href="profile.html" class="dash-user" aria-label="Signed in as Alex Morgan, Pro tier">
               <span class="dash-user__avatar" aria-hidden="true">AM</span>
               <div class="dash-user__meta">
                 <span class="dash-user__name">Alex Morgan</span>
                 <span class="dash-user__role muted small">Pro · Product</span>
               </div>
-            </div>
+            </a>
           </div>
         </header>
 
@@ -185,6 +189,34 @@
                 <strong class="dash-truncate">Senior PM</strong>
               </div>
             </div>
+          </section>
+
+          <!-- Alerts Section -->
+          <section class="dash-card glass-panel glass-panel--elevated dash-card--wide" id="alerts" data-dash-animate style="border-left: 4px solid #b794f6; margin-top: 1.5rem; background: linear-gradient(125deg, rgba(183, 148, 246, 0.08), rgba(110, 168, 255, 0.02)); margin-bottom: -0.5rem;">
+            <div class="dash-card__head">
+              <div>
+                <h3 class="dash-card__title" style="color: #e2e8ff;">System Alerts &amp; Warnings</h3>
+                <p class="dash-card__desc muted small">Critical actions required to maintain career health.</p>
+              </div>
+            </div>
+            <ul class="dash-reminders" style="gap: 0.8rem;">
+              <li class="dash-reminders__item dash-reminders__item--accent" style="border-color: rgba(255,100,140,0.3);">
+                <span class="dash-reminders__tag" style="background: rgba(255,100,140,0.1); color: #ff9bbd;">Outdated</span>
+                <div style="flex: 1;">
+                  <p class="dash-reminders__title" style="color: #ffb3c6;">Resume is 3 months outdated</p>
+                  <p class="muted small">Your latest project is missing from your core resume.</p>
+                </div>
+                <a href="resume-upload.html" class="btn btn--ghost btn--sm">Update Now</a>
+              </li>
+              <li class="dash-reminders__item">
+                <span class="dash-reminders__tag dash-reminders__tag--purple">Gap</span>
+                <div style="flex: 1;">
+                  <p class="dash-reminders__title">Missing Skill: Distributed Systems</p>
+                  <p class="muted small">Required for 80% of your Dream Roles. Start studying.</p>
+                </div>
+                <a href="#missing-skills" class="btn btn--ghost btn--sm">View Plan</a>
+              </li>
+            </ul>
           </section>
 
           <div class="dash-grid">
@@ -288,6 +320,7 @@
                   <h3 class="dash-card__title">Upcoming reminders</h3>
                   <p class="dash-card__desc muted small">Stay on pace for your milestones.</p>
                 </div>
+                <a href="reminders.html" class="btn btn--ghost btn--sm">View All</a>
               </div>
               <ul class="dash-reminders">
                 <li class="dash-reminders__item">
@@ -343,6 +376,7 @@
                   <h3 class="dash-card__title">Dream company pipeline</h3>
                   <p class="dash-card__desc muted small">Readiness versus your archetype clusters.</p>
                 </div>
+                <a href="dream-company.html" class="btn btn--ghost btn--sm">View Roadmap</a>
               </div>
               <div class="dash-companies">
                 <article class="dash-companies__tile glass-panel glass-panel--inset">
@@ -415,6 +449,31 @@
                   <span class="muted mono small">Suggested · pairing + doc critique</span>
                 </li>
               </ul>
+            </section>
+
+            <!-- 9. Recent AI Analysis Summary Panel -->
+            <section class="dash-card glass-panel glass-panel--elevated" id="recent-analysis" data-dash-animate>
+              <div class="dash-card__head">
+                <div>
+                  <h3 class="dash-card__title">Recent AI Analysis</h3>
+                  <p class="dash-card__desc muted small">Summary of your latest resume upload.</p>
+                </div>
+                <a href="resume-upload.html" class="btn btn--ghost btn--sm">Run new</a>
+              </div>
+              <div class="dash-ai-summary" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem;">
+                <div style="padding: 1rem; border-radius: 8px; background: rgba(110, 168, 255, 0.08); border: 1px solid rgba(110, 168, 255, 0.2);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <strong style="font-size: 0.95rem; font-weight: 600;">Overall Feedback</strong>
+                    <span class="dash-pill dash-pill--good">Positive</span>
+                  </div>
+                  <p class="muted small" style="margin: 0; line-height: 1.5;">Your experience aligns well with Staff PM roles, but your impact lines need more quantifiable metrics (e.g., revenue driven, user growth %).</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                  <span class="dash-pill dash-pill--outline" style="border-color: rgba(110,168,255,0.4); color: #6ea8ff;">Strong Structure</span>
+                  <span class="dash-pill dash-pill--outline" style="border-color: rgba(110,168,255,0.4); color: #6ea8ff;">Action Verbs Used</span>
+                  <span class="dash-pill dash-pill--outline" style="border-color: rgba(255,100,140,0.4); color: #ff9bbd;">Lacking Metrics</span>
+                </div>
+              </div>
             </section>
 
             <!-- 8. Documents -->

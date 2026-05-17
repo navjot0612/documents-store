@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Reminders — CareerOS</title>
+    <meta
+      name="description"
+      content="AI-powered smart reminders for your career milestones and deadlines."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="reminders.css" />
+  </head>
+  <body class="rm-body">
+    <div class="ambient" aria-hidden="true">
+      <div class="orb orb--1"></div>
+      <div class="orb orb--2"></div>
+      <div class="orb orb--3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <header class="rm-top glass-panel glass-panel--elevated">
+      <div class="rm-top__inner">
+        <div class="rm-top__brand">
+          <a href="index.html" class="logo">
+            <span class="logo__mark logo__mark--sm" aria-hidden="true"></span>
+            CareerOS
+          </a>
+          <span class="rm-chip rm-chip--ai mono">chronos</span>
+        </div>
+        <nav class="rm-nav" aria-label="Page sections">
+          <a href="#calendar">Calendar</a>
+          <a href="#interviews">Interviews</a>
+          <a href="#deadlines">Deadlines</a>
+          <a href="#maintenance">Maintenance</a>
+        </nav>
+        <div class="rm-top__actions">
+          <a href="dashboard.html" class="btn btn--ghost btn--sm">Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="rm-main">
+      <div class="rm-hero rm-animate">
+        <p class="rm-eyebrow">
+          <span class="rm-eyebrow__dot"></span>
+          Timeline Intelligence
+        </p>
+        <h1 class="rm-hero__title">Smart <span class="gradient-text">Reminders</span></h1>
+        <p class="muted rm-hero__lead">
+          Never miss an interview, deadline, or expiring credential. Synchronized with your career goals.
+        </p>
+      </div>
+
+      <div class="rm-layout">
+        
+        <!-- Left Column: Calendar UI -->
+        <div class="rm-col-left rm-animate">
+          <div class="rm-card glass-panel glass-panel--elevated" id="calendar">
+            <div class="rm-cal-header">
+              <button class="rm-cal-btn" aria-label="Previous Month">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <h2 class="rm-cal-month">May 2026</h2>
+              <button class="rm-cal-btn" aria-label="Next Month">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+            
+            <div class="rm-cal-grid">
+              <!-- Days of week -->
+              <div class="rm-cal-dow muted">S</div>
+              <div class="rm-cal-dow muted">M</div>
+              <div class="rm-cal-dow muted">T</div>
+              <div class="rm-cal-dow muted">W</div>
+              <div class="rm-cal-dow muted">T</div>
+              <div class="rm-cal-dow muted">F</div>
+              <div class="rm-cal-dow muted">S</div>
+              
+              <!-- Blank days -->
+              <div class="rm-cal-day rm-cal-day--empty"></div>
+              <div class="rm-cal-day rm-cal-day--empty"></div>
+              <div class="rm-cal-day rm-cal-day--empty"></div>
+              <div class="rm-cal-day rm-cal-day--empty"></div>
+              <div class="rm-cal-day rm-cal-day--empty"></div>
+              
+              <!-- Days 1-31 -->
+              <div class="rm-cal-day">1</div>
+              <div class="rm-cal-day">2</div>
+              <div class="rm-cal-day">3</div>
+              <div class="rm-cal-day">4</div>
+              <div class="rm-cal-day">5</div>
+              <div class="rm-cal-day">6</div>
+              <div class="rm-cal-day">7</div>
+              
+              <div class="rm-cal-day">8</div>
+              <div class="rm-cal-day">9</div>
+              <div class="rm-cal-day">10</div>
+              <div class="rm-cal-day">11</div>
+              <div class="rm-cal-day rm-cal-day--event">
+                12
+                <div class="rm-cal-dots"><span class="rm-dot rm-dot--blue"></span></div>
+              </div>
+              <div class="rm-cal-day">13</div>
+              <div class="rm-cal-day">14</div>
+              
+              <div class="rm-cal-day">15</div>
+              <div class="rm-cal-day">16</div>
+              <div class="rm-cal-day rm-cal-day--today">17</div>
+              <div class="rm-cal-day rm-cal-day--event">
+                18
+                <div class="rm-cal-dots"><span class="rm-dot rm-dot--violet"></span></div>
+              </div>
+              <div class="rm-cal-day">19</div>
+              <div class="rm-cal-day rm-cal-day--event">
+                20
+                <div class="rm-cal-dots"><span class="rm-dot rm-dot--green"></span></div>
+              </div>
+              <div class="rm-cal-day">21</div>
+              
+              <div class="rm-cal-day">22</div>
+              <div class="rm-cal-day">23</div>
+              <div class="rm-cal-day rm-cal-day--event">
+                24
+                <div class="rm-cal-dots"><span class="rm-dot rm-dot--yellow"></span></div>
+              </div>
+              <div class="rm-cal-day">25</div>
+              <div class="rm-cal-day">26</div>
+              <div class="rm-cal-day rm-cal-day--event">
+                27
+                <div class="rm-cal-dots"><span class="rm-dot rm-dot--red"></span></div>
+              </div>
+              <div class="rm-cal-day">28</div>
+              
+              <div class="rm-cal-day">29</div>
+              <div class="rm-cal-day">30</div>
+              <div class="rm-cal-day">31</div>
+              
+              <!-- Extra blanks -->
+              <div class="rm-cal-day rm-cal-day--empty"></div>
+              <div class="rm-cal-day rm-cal-day--empty"></div>
+              <div class="rm-cal-day rm-cal-day--empty"></div>
+            </div>
+            
+            <div class="rm-cal-legend">
+              <div class="rm-legend-item"><span class="rm-dot rm-dot--violet"></span> <span class="muted small">Interviews</span></div>
+              <div class="rm-legend-item"><span class="rm-dot rm-dot--red"></span> <span class="muted small">Deadlines</span></div>
+              <div class="rm-legend-item"><span class="rm-dot rm-dot--yellow"></span> <span class="muted small">Maintenance</span></div>
+              <div class="rm-legend-item"><span class="rm-dot rm-dot--green"></span> <span class="muted small">Hackathons</span></div>
+            </div>
+          </div>
+          
+          <!-- Summary widget -->
+          <div class="rm-widget glass-panel glass-panel--inset rm-mt">
+            <h3 class="rm-widget-title">Week at a glance</h3>
+            <div class="rm-widget-stats">
+              <div class="rm-stat">
+                <span class="rm-stat-val">3</span>
+                <span class="rm-stat-label muted small">Action Items</span>
+              </div>
+              <div class="rm-stat">
+                <span class="rm-stat-val">2</span>
+                <span class="rm-stat-label muted small">Days until loop</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Reminders Feed -->
+        <div class="rm-col-right">
+          
+          <div class="rm-feed-header rm-animate">
+            <h2 class="rm-section-title">Upcoming Alerts</h2>
+            <div class="rm-filter">
+              <button class="rm-filter-btn is-active">All</button>
+              <button class="rm-filter-btn">Interviews</button>
+              <button class="rm-filter-btn">Deadlines</button>
+            </div>
+          </div>
+
+          <div class="rm-feed">
+            
+            <!-- Interview Alert -->
+            <article class="rm-alert glass-panel glass-panel--elevated rm-alert--high rm-animate" id="interviews">
+              <div class="rm-alert__icon" style="color: #c89bff; background: rgba(200, 155, 255, 0.15);">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14v-4z"></path><rect x="3" y="6" width="12" height="12" rx="2" ry="2"></rect></svg>
+              </div>
+              <div class="rm-alert__content">
+                <div class="rm-alert__head">
+                  <span class="rm-alert__badge rm-alert__badge--violet mono">Tomorrow</span>
+                  <button class="rm-alert__close" aria-label="Dismiss"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                </div>
+                <h3 class="rm-alert__title">Mock Interview: Staff PM Loop</h3>
+                <p class="rm-alert__desc muted">Systems Design round with Ex-Google interviewer. Have your architecture diagrams ready.</p>
+                <div class="rm-alert__foot">
+                  <span class="muted small mono">May 18, 10:00 AM PST</span>
+                  <a href="#" class="rm-link">Join Zoom</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Hackathon Alert -->
+            <article class="rm-alert glass-panel glass-panel--elevated rm-animate">
+              <div class="rm-alert__icon" style="color: #34d399; background: rgba(52, 211, 153, 0.15);">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <div class="rm-alert__content">
+                <div class="rm-alert__head">
+                  <span class="rm-alert__badge rm-alert__badge--green mono">In 3 Days</span>
+                  <button class="rm-alert__close" aria-label="Dismiss"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                </div>
+                <h3 class="rm-alert__title">Global AI Hackathon 2026</h3>
+                <p class="rm-alert__desc muted">Team registration closes soon. You need 1 more backend engineer for your roster.</p>
+                <div class="rm-alert__foot">
+                  <span class="muted small mono">May 20, 11:59 PM EST</span>
+                  <a href="#" class="rm-link">Complete Team</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Resume Update -->
+            <article class="rm-alert glass-panel glass-panel--elevated rm-animate" id="maintenance">
+              <div class="rm-alert__icon" style="color: #f9cb28; background: rgba(249, 203, 40, 0.15);">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+              <div class="rm-alert__content">
+                <div class="rm-alert__head">
+                  <span class="rm-alert__badge rm-alert__badge--yellow mono">In 1 Week</span>
+                  <button class="rm-alert__close" aria-label="Dismiss"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                </div>
+                <h3 class="rm-alert__title">Quarterly Resume Update</h3>
+                <p class="rm-alert__desc muted">It's been 3 months since your last ATS scan. Time to add your recent Q1 product launch metrics.</p>
+                <div class="rm-alert__foot">
+                  <span class="muted small mono">May 24</span>
+                  <a href="resume-upload.html" class="rm-link">Upload New Draft</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Internship Deadline -->
+            <article class="rm-alert glass-panel glass-panel--elevated rm-animate" id="deadlines">
+              <div class="rm-alert__icon" style="color: #ff4d4d; background: rgba(255, 77, 77, 0.15);">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="rm-alert__content">
+                <div class="rm-alert__head">
+                  <span class="rm-alert__badge rm-alert__badge--red mono">In 10 Days</span>
+                  <button class="rm-alert__close" aria-label="Dismiss"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                </div>
+                <h3 class="rm-alert__title">Stripe SWE Internship App</h3>
+                <p class="rm-alert__desc muted">Application window for Summer 2027 closes. Ensure your portfolio links are active.</p>
+                <div class="rm-alert__foot">
+                  <span class="muted small mono">May 27</span>
+                  <a href="#" class="rm-link">Review Application</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Certificate Expiry -->
+            <article class="rm-alert glass-panel glass-panel--elevated rm-animate">
+              <div class="rm-alert__icon" style="color: #00add8; background: rgba(0, 173, 216, 0.15);">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+              </div>
+              <div class="rm-alert__content">
+                <div class="rm-alert__head">
+                  <span class="rm-alert__badge rm-alert__badge--blue mono">In 30 Days</span>
+                  <button class="rm-alert__close" aria-label="Dismiss"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                </div>
+                <h3 class="rm-alert__title">AWS Solutions Architect Cert</h3>
+                <p class="rm-alert__desc muted">Your AWS certification is approaching expiration. Schedule your recertification exam.</p>
+                <div class="rm-alert__foot">
+                  <span class="muted small mono">June 16</span>
+                  <a href="#" class="rm-link">Schedule Exam</a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="rm-foot muted small mono">
+      <div class="rm-foot__inner">
+        <span>CareerOS intelligence · Timeline syncing active</span>
+        <span class="rm-foot__gap">··</span>
+        <a href="dashboard.html">Back to Dashboard</a>
+      </div>
+    </footer>
+
+    <script src="reminders.js"></script>
+  </body>
+</html>

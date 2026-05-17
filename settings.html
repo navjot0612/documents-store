@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings — CareerOS</title>
+    <meta name="description" content="Manage your CareerOS settings and integrations." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="settings.css" />
+  </head>
+  <body class="st-body">
+    <div class="ambient" aria-hidden="true">
+      <div class="orb orb--1"></div>
+      <div class="orb orb--2"></div>
+      <div class="orb orb--3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <header class="st-top glass-panel glass-panel--elevated">
+      <div class="st-top__inner">
+        <div class="st-top__brand">
+          <a href="index.html" class="logo">
+            <span class="logo__mark logo__mark--sm" aria-hidden="true"></span>
+            CareerOS
+          </a>
+          <span class="st-chip st-chip--ai mono">config</span>
+        </div>
+        <nav class="st-nav" aria-label="Page sections">
+          <a href="#general">General</a>
+          <a href="#integrations" class="st-nav--active">Integrations</a>
+          <a href="#billing">Billing</a>
+        </nav>
+        <div class="st-top__actions">
+          <a href="dashboard.html" class="btn btn--ghost btn--sm">Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="st-main">
+      <div class="st-hero">
+        <h1 class="st-hero__title">Settings</h1>
+        <p class="muted st-hero__lead">Manage your workspace preferences, API connections, and account details.</p>
+      </div>
+
+      <div class="st-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="st-sidebar glass-panel glass-panel--elevated">
+          <nav class="st-side-nav">
+            <a href="#general" class="st-side-nav__item">General</a>
+            <a href="#integrations" class="st-side-nav__item is-active">
+              Integrations
+              <span class="st-badge">AI</span>
+            </a>
+            <a href="#notifications" class="st-side-nav__item">Notifications</a>
+            <a href="#billing" class="st-side-nav__item">Billing & Plan</a>
+          </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="st-content">
+          <section id="integrations" class="st-section">
+            <header class="st-section__head">
+              <h2 class="st-section__title">AI Integrations</h2>
+              <p class="muted small">Connect external LLM providers to power your career intelligence tools.</p>
+            </header>
+
+            <article class="st-card glass-panel glass-panel--elevated">
+              <div class="st-card__top">
+                <div class="st-card__icon">
+                  <!-- Gemini Sparkle Icon -->
+                  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <div class="st-card__info">
+                  <h3 class="st-card__title">Google Gemini API</h3>
+                  <p class="muted small">Required for dynamic resume analysis and pathfinding simulations.</p>
+                </div>
+                <div class="st-status" id="apiStatus">
+                  <span class="st-status__dot"></span>
+                  <span class="st-status__text mono">Disconnected</span>
+                </div>
+              </div>
+
+              <div class="st-card__body">
+                <div class="st-form-group">
+                  <label for="geminiKey" class="st-label">API Key</label>
+                  <div class="st-input-wrap">
+                    <input type="password" id="geminiKey" class="st-input" placeholder="AIzaSy..." spellcheck="false" autocomplete="off" />
+                    <button type="button" class="st-btn-icon" id="toggleVisBtn" aria-label="Toggle password visibility">
+                      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </button>
+                  </div>
+                  <p class="muted small st-help-text">Your key is stored locally in your browser's <code>localStorage</code> and never sent to our servers.</p>
+                </div>
+              </div>
+
+              <div class="st-card__foot">
+                <button type="button" class="btn btn--ghost btn--sm st-hidden" id="disconnectBtn">Disconnect</button>
+                <button type="button" class="btn btn--primary btn--sm" id="connectBtn">Connect Gemini API</button>
+              </div>
+            </article>
+
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Success Toast -->
+    <div class="st-toast glass-panel glass-panel--elevated" id="toastMsg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <span class="st-toast__text" id="toastText">Settings saved successfully.</span>
+    </div>
+
+    <script src="settings.js"></script>
+  </body>
+</html>

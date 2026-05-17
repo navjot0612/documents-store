@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile — CareerOS</title>
+    <meta
+      name="description"
+      content="Manage your professional profile, skills, and career timeline."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="profile.css" />
+  </head>
+  <body class="pf-body">
+    <div class="ambient" aria-hidden="true">
+      <div class="orb orb--1"></div>
+      <div class="orb orb--2"></div>
+      <div class="orb orb--3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <header class="pf-top glass-panel glass-panel--elevated">
+      <div class="pf-top__inner">
+        <div class="pf-top__brand">
+          <a href="index.html" class="logo">
+            <span class="logo__mark logo__mark--sm" aria-hidden="true"></span>
+            CareerOS
+          </a>
+          <span class="pf-chip pf-chip--ai mono">identity</span>
+        </div>
+        <nav class="pf-nav" aria-label="Page sections">
+          <a href="#overview">Overview</a>
+          <a href="#skills">Skills & Certs</a>
+          <a href="#timeline">Timeline</a>
+          <a href="#documents">Documents</a>
+        </nav>
+        <div class="pf-top__actions">
+          <a href="dashboard.html" class="btn btn--ghost btn--sm">Dashboard</a>
+          <button id="globalEditBtn" class="btn btn--primary btn--sm">Edit Profile</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="pf-main">
+      <!-- Profile Header -->
+      <section class="pf-hero glass-panel glass-panel--elevated pf-animate" id="overview">
+        <div class="pf-hero__avatar-container">
+          <div class="pf-hero__avatar-ring"></div>
+          <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Alex Morgan" class="pf-hero__avatar" />
+          <button class="pf-edit-icon pf-hidden" aria-label="Edit Avatar">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          </button>
+        </div>
+        <div class="pf-hero__info">
+          <div class="pf-hero__title-row">
+            <h1 class="pf-hero__name editable-text" data-field="name">Alex Morgan</h1>
+            <span class="pf-badge pf-badge--pro">Pro Tier</span>
+          </div>
+          <p class="pf-hero__role editable-text" data-field="role">Senior Product Manager</p>
+          <div class="pf-hero__meta">
+            <span class="pf-meta-item">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span class="editable-text" data-field="location">San Francisco, CA</span>
+            </span>
+            <span class="pf-meta-item">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span class="editable-text" data-field="email">alex.morgan@example.com</span>
+            </span>
+          </div>
+          <div class="pf-hero__bio">
+            <p class="editable-text" data-field="bio" data-multiline="true">
+              Product leader focused on 0→1 infrastructure platforms. Passionate about developer experience, distributed systems, and scaling engineering orgs. Currently exploring roles in AI and data infrastructure.
+            </p>
+          </div>
+        </div>
+        <div class="pf-hero__stats">
+          <div class="pf-stat">
+            <span class="pf-stat__val">78</span>
+            <span class="pf-stat__label muted">Profile Score</span>
+          </div>
+          <div class="pf-stat">
+            <span class="pf-stat__val">4</span>
+            <span class="pf-stat__label muted">Active Goals</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="pf-layout">
+        <!-- Left Column -->
+        <div class="pf-col pf-col--narrow">
+          
+          <!-- Skills -->
+          <section class="pf-card glass-panel glass-panel--elevated pf-animate" id="skills">
+            <div class="pf-card__head">
+              <h2 class="pf-section-title">Verified Skills</h2>
+              <button class="pf-btn-icon pf-hidden" aria-label="Add Skill"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+            </div>
+            <div class="pf-skills">
+              <div class="pf-skill-item">
+                <div class="pf-skill-top">
+                  <span class="pf-skill-name">Product Strategy</span>
+                  <span class="mono muted small">Expert</span>
+                </div>
+                <div class="pf-meter"><div class="pf-meter-fill pf-meter-fill--accent" style="width: 90%;"></div></div>
+              </div>
+              <div class="pf-skill-item">
+                <div class="pf-skill-top">
+                  <span class="pf-skill-name">System Architecture</span>
+                  <span class="mono muted small">Advanced</span>
+                </div>
+                <div class="pf-meter"><div class="pf-meter-fill pf-meter-fill--accent2" style="width: 75%;"></div></div>
+              </div>
+              <div class="pf-skill-item">
+                <div class="pf-skill-top">
+                  <span class="pf-skill-name">Go / Python</span>
+                  <span class="mono muted small">Intermediate</span>
+                </div>
+                <div class="pf-meter"><div class="pf-meter-fill pf-meter-fill--accent3" style="width: 60%;"></div></div>
+              </div>
+              <div class="pf-skill-item">
+                <div class="pf-skill-top">
+                  <span class="pf-skill-name">Data Analytics</span>
+                  <span class="mono muted small">Advanced</span>
+                </div>
+                <div class="pf-meter"><div class="pf-meter-fill" style="width: 80%;"></div></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Certifications -->
+          <section class="pf-card glass-panel glass-panel--elevated pf-animate">
+            <div class="pf-card__head">
+              <h2 class="pf-section-title">Certifications</h2>
+              <button class="pf-btn-icon pf-hidden" aria-label="Add Certification"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+            </div>
+            <div class="pf-certs">
+              <div class="pf-cert">
+                <div class="pf-cert__icon" style="color: #f9cb28;"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+                <div class="pf-cert__info">
+                  <h3 class="pf-cert__name">AWS Certified Solutions Architect</h3>
+                  <span class="muted small mono">Issued: Mar 2024</span>
+                </div>
+              </div>
+              <div class="pf-cert">
+                <div class="pf-cert__icon" style="color: #00add8;"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                <div class="pf-cert__info">
+                  <h3 class="pf-cert__name">Certified Kubernetes Administrator</h3>
+                  <span class="muted small mono">Issued: Oct 2025</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Documents -->
+          <section class="pf-card glass-panel glass-panel--elevated pf-animate" id="documents">
+            <div class="pf-card__head">
+              <h2 class="pf-section-title">Documents</h2>
+              <button class="pf-btn-icon pf-hidden" aria-label="Add Document"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+            </div>
+            <div class="pf-docs">
+              <a href="#" class="pf-doc-link glass-panel glass-panel--inset">
+                <span class="pf-doc-ico">PDF</span>
+                <div class="pf-doc-info">
+                  <span class="pf-doc-name">Resume_PM_Core_v12.pdf</span>
+                  <span class="muted small">Primary Profile · 820 KB</span>
+                </div>
+              </a>
+              <a href="#" class="pf-doc-link glass-panel glass-panel--inset">
+                <span class="pf-doc-ico pf-doc-ico--alt">PNG</span>
+                <div class="pf-doc-info">
+                  <span class="pf-doc-name">portfolio_grid.png</span>
+                  <span class="muted small">Vision Doc · 1.2 MB</span>
+                </div>
+              </a>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="pf-col pf-col--wide">
+          
+          <!-- Key Achievements -->
+          <section class="pf-card glass-panel glass-panel--elevated pf-animate">
+            <div class="pf-card__head">
+              <h2 class="pf-section-title">Highlight Achievements</h2>
+              <button class="pf-btn-icon pf-hidden" aria-label="Add Achievement"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+            </div>
+            <div class="pf-achievements">
+              <div class="pf-achieve glass-panel glass-panel--inset">
+                <div class="pf-achieve__glow pf-achieve__glow--accent"></div>
+                <div class="pf-achieve__icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
+                <div class="pf-achieve__content">
+                  <h3 class="pf-achieve__title editable-text" data-field="achieve1-title">Scaled API Infrastructure 10x</h3>
+                  <p class="muted small editable-text" data-field="achieve1-desc" data-multiline="true">Led the cross-functional team that migrated core monolith to microservices, increasing throughput from 10k to 100k TPS while reducing latency by 40%.</p>
+                </div>
+              </div>
+              <div class="pf-achieve glass-panel glass-panel--inset">
+                <div class="pf-achieve__glow pf-achieve__glow--purple"></div>
+                <div class="pf-achieve__icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+                <div class="pf-achieve__content">
+                  <h3 class="pf-achieve__title editable-text" data-field="achieve2-title">Drove $2M ARR via Enterprise Feature</h3>
+                  <p class="muted small editable-text" data-field="achieve2-desc" data-multiline="true">Defined product requirements and GTM strategy for the new RBAC enterprise module, securing 3 Fortune 500 contracts in Q3.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Career Timeline -->
+          <section class="pf-card glass-panel glass-panel--elevated pf-animate" id="timeline">
+            <div class="pf-card__head">
+              <h2 class="pf-section-title">Career Timeline</h2>
+              <button class="pf-btn-icon pf-hidden" aria-label="Add Role"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+            </div>
+            
+            <div class="pf-timeline">
+              <div class="pf-timeline__line"></div>
+              
+              <!-- Timeline Item 1 -->
+              <div class="pf-timeline__item">
+                <div class="pf-timeline__dot pf-timeline__dot--active"></div>
+                <div class="pf-timeline__content glass-panel glass-panel--inset">
+                  <div class="pf-timeline__head">
+                    <div>
+                      <h3 class="pf-timeline__role editable-text" data-field="role1">Senior Product Manager</h3>
+                      <span class="pf-timeline__company editable-text" data-field="comp1">Nexus Technologies</span>
+                    </div>
+                    <span class="pf-timeline__date mono muted editable-text" data-field="date1">2023 — Present</span>
+                  </div>
+                  <ul class="pf-bullet-list muted small">
+                    <li class="editable-text" data-field="r1-b1">Direct strategy for a team of 15 engineers and 2 designers on core platform.</li>
+                    <li class="editable-text" data-field="r1-b2">Launched AI-assisted workflow engine, improving user retention by 22%.</li>
+                    <li class="editable-text" data-field="r1-b3">Establish quarterly OKRs aligned with company ARR targets.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Timeline Item 2 -->
+              <div class="pf-timeline__item">
+                <div class="pf-timeline__dot"></div>
+                <div class="pf-timeline__content glass-panel glass-panel--inset">
+                  <div class="pf-timeline__head">
+                    <div>
+                      <h3 class="pf-timeline__role editable-text" data-field="role2">Product Manager</h3>
+                      <span class="pf-timeline__company editable-text" data-field="comp2">Fintech Innovators</span>
+                    </div>
+                    <span class="pf-timeline__date mono muted editable-text" data-field="date2">2020 — 2023</span>
+                  </div>
+                  <ul class="pf-bullet-list muted small">
+                    <li class="editable-text" data-field="r2-b1">Managed the payment processing pipeline, handling $50M+ in daily volume.</li>
+                    <li class="editable-text" data-field="r2-b2">Reduced transaction failure rate from 1.2% to 0.4% via retry-logic implementation.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Timeline Item 3 -->
+              <div class="pf-timeline__item">
+                <div class="pf-timeline__dot"></div>
+                <div class="pf-timeline__content glass-panel glass-panel--inset">
+                  <div class="pf-timeline__head">
+                    <div>
+                      <h3 class="pf-timeline__role editable-text" data-field="role3">Software Engineer</h3>
+                      <span class="pf-timeline__company editable-text" data-field="comp3">CloudSync Data</span>
+                    </div>
+                    <span class="pf-timeline__date mono muted editable-text" data-field="date3">2018 — 2020</span>
+                  </div>
+                  <ul class="pf-bullet-list muted small">
+                    <li class="editable-text" data-field="r3-b1">Built and maintained REST APIs using Node.js and PostgreSQL.</li>
+                    <li class="editable-text" data-field="r3-b2">Transitioned monolithic architecture to Dockerized microservices.</li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+
+    <footer class="pf-foot muted small mono">
+      <div class="pf-foot__inner">
+        <span>CareerOS intelligence · Profile syncing active</span>
+        <span class="pf-foot__gap">··</span>
+        <a href="dashboard.html">Back to Dashboard</a>
+      </div>
+    </footer>
+
+    <script src="profile.js"></script>
+  </body>
+</html>

@@ -121,72 +121,223 @@
     requestAnimationFrame(tick);
   }
 
-  function runAnalyze(done) {
-    if (!aiBlock || !aiStatus) {
-      done();
-      return;
+  async function extractPdfText(file) {
+    if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+      return "Simulated text for non-PDF file: " + file.name;
     }
+    try {
+      var arrayBuffer = await file.arrayBuffer();
+      var pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+      var text = "";
+      for (var i = 1; i <= pdf.numPages; i++) {
+        var page = await pdf.getPage(i);
+        var content = await page.getTextContent();
+        var strings = content.items.map(function(item) { return item.str; });
+        text += strings.join(" ") + " ";
+      }
+      return text;
+    } catch(err) {
+      console.error("PDF Extraction error:", err);
+      return "Could not extract text from PDF.";
+    }
+  }
+
+  async function callGemini(text) {
+    var apiKey = localStorage.getItem("geminiApiKey");
+    if (!apiKey) throw new Error("API Key not found");
+    
+    var promptText = `Analyze this resume text and provide a strict JSON response. Do NOT use markdown code blocks like \`\`\`json. Return ONLY valid JSON.
+Format:
+{
+  "ats_score": { "main": 85, "keywords": 80, "structure": 90, "impact": 85 },
+  "missing_skills": ["Skill 1", "Skill 2"],
+  "improvements": ["Improvement 1", "Improvement 2"],
+  "roadmap": ["Step 1", "Step 2"]
+}
+Resume Text:
+${text.substring(0, 10000)}`;
+
+    var response;
+    try {
+      response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: promptText
+                }
+              ]
+            }
+          ]
+        })
+      });
+    } catch (err) {
+      console.error("[Gemini API] Network/CORS Error:", err);
+      throw new Error("Network or CORS issue. Check connection.");
+    }
+
+    if (!response.ok) {
+      var errData;
+      try { errData = await response.json(); } catch (e) { errData = {}; }
+      var msg = errData?.error?.message || "Unknown API error";
+      var status = response.status;
+      console.error(`[Gemini API] HTTP ${status}:`, errData);
+      
+      if (status === 400) throw new Error("Malformed request: " + msg);
+      if (status === 401 || status === 403) throw new Error("Invalid API key or unauthorized.");
+      if (status === 429) throw new Error("Quota exceeded. Try later.");
+      throw new Error("API Error: " + msg);
+    }
+    
+    var data = await response.json();
+    console.log("[Gemini API] Full Response:", data);
+    
+    if (data.promptFeedback?.blockReason) {
+      console.error("[Gemini API] Blocked:", data.promptFeedback);
+      throw new Error("Blocked by safety filters.");
+    }
+    
+    if (!data.candidates?.[0]?.content) {
+      console.error("[Gemini API] Invalid response:", data);
+      throw new Error("Empty response from Gemini.");
+    }
+
+    var resultText = data.candidates[0].content.parts[0].text;
+    resultText = resultText.replace(/```json/g, '').replace(/```/g, '').trim();
+    
+    try {
+      return JSON.parse(resultText);
+    } catch (e) {
+      console.error("[Gemini API] JSON Parse Error:", resultText);
+      throw new Error("Failed to parse AI response.");
+    }
+  }
+
+  function getMockFallback() {
+    return {
+      "ats_score": { "main": 78, "keywords": 72, "structure": 85, "impact": 70 },
+      "missing_skills": ["Cloud Architecture (AWS/GCP)", "System Design at scale", "GraphQL APIs"],
+      "improvements": [
+        "Quantify your backend performance improvements with specific percentages.",
+        "Add a dedicated 'Core Competencies' section near the top.",
+        "Use stronger action verbs for your impact lines (e.g., 'Spearheaded' instead of 'Helped')."
+      ],
+      "roadmap": [
+        "Month 1: Obtain AWS Certified Developer certification.",
+        "Month 3: Build a scalable microservices side-project to demonstrate system design.",
+        "Month 6: Transition into a senior backend role internally or apply externally."
+      ]
+    };
+  }
+
+  async function runAnalyze(done) {
+    if (!aiBlock || !aiStatus) { done(); return; }
     analyzing = true;
     aiBlock.hidden = false;
     aiBlock.classList.remove("is-idle");
-    if (aiHints) aiHints.innerHTML = "";
-
-    var pipeline = [
-      "Vectorizing headings & sections…",
-      "Aligning taxonomy to staffing archetypes…",
-      "Measuring lexical density vs. benchmarks…",
-      "Mapping evidence lines to KPI templates…",
-      "Generating composite score…",
-      "Publishing intelligence packet…",
-    ];
-
+    aiBlock.classList.remove("is-hiding");
+    
+    var aiProgressBar = document.getElementById("aiProgressBar");
+    if (aiProgressBar) aiProgressBar.style.width = "0%";
+    
     analyzeBtn.disabled = true;
     analyzeBtn.setAttribute("aria-busy", "true");
-    if (analyzeSpinner) analyzeSpinner.hidden = reduceMotion();
+    if (analyzeSpinner) analyzeSpinner.hidden = false;
 
-    function finishAnalyze() {
+    var isMock = !localStorage.getItem("geminiApiKey");
+
+    var pipeline = [
+      "Vectorizing headings & sections...",
+      "Extracting text from document...",
+      "Analyzing semantic structure...",
+      "Mapping skills to industry taxonomy...",
+      isMock ? "Mock AI: Generating insights..." : "Querying Gemini API...",
+      "Calculating ATS match score...",
+      "Building career roadmap...",
+      "Finalizing intelligence packet..."
+    ];
+
+    var step = 0;
+    var totalSteps = pipeline.length;
+    var interval = setInterval(function() {
+      if (step < totalSteps) {
+        aiStatus.style.opacity = "0";
+        setTimeout(function() {
+          aiStatus.textContent = pipeline[step];
+          aiStatus.style.opacity = "1";
+        }, 300);
+        
+        if (aiProgressBar) {
+          aiProgressBar.style.width = Math.min(((step + 1) / totalSteps) * 100, 95) + "%";
+        }
+        
+        step++;
+      }
+    }, 1200);
+
+    try {
+      var result;
+      var usedMockFallback = false;
+      if (isMock) {
+        usedMockFallback = true;
+        await new Promise(function(r) { setTimeout(r, pipeline.length * 1200); });
+        result = getMockFallback();
+      } else {
+        var text = await extractPdfText(currentFile);
+        try {
+          result = await callGemini(text);
+        } catch (apiErr) {
+          if (apiErr.message.includes("Quota") || apiErr.message.includes("Network")) {
+            console.warn("[Gemini API] Quota or Network error, falling back to mock:", apiErr);
+            aiStatus.style.opacity = "0";
+            await new Promise(function(r) { setTimeout(r, 300); });
+            aiStatus.textContent = "API unavailable. Activating Mock Fallback Engine...";
+            aiStatus.style.opacity = "1";
+            aiStatus.style.color = "#f59e0b";
+            await new Promise(function(r) { setTimeout(r, 2500); });
+            usedMockFallback = true;
+            result = getMockFallback();
+          } else {
+            throw apiErr; // Rethrow to show detailed UI error (e.g., Invalid API key)
+          }
+        }
+      }
+      
+      clearInterval(interval);
+      aiStatus.style.opacity = "0";
+      setTimeout(function() {
+        aiStatus.textContent = "Analysis complete. Rendering results...";
+        aiStatus.style.opacity = "1";
+        if (aiProgressBar) aiProgressBar.style.width = "100%";
+      }, 300);
+      
+      setTimeout(function() {
+        aiBlock.classList.add("is-hiding");
+        setTimeout(function() {
+          done(result, usedMockFallback);
+        }, 400); 
+      }, 1000);
+      
+    } catch(err) {
+      clearInterval(interval);
+      console.error("[Resume Analysis] Failed:", err);
+      aiStatus.style.opacity = "0";
+      setTimeout(function() {
+        aiStatus.textContent = err.message || "Analysis failed. Please try again.";
+        aiStatus.style.color = "#ff4d4d";
+        aiStatus.style.opacity = "1";
+      }, 300);
+      done(null);
+    } finally {
       analyzing = false;
       analyzeBtn.removeAttribute("aria-busy");
       if (analyzeSpinner) analyzeSpinner.hidden = true;
-      aiBlock.classList.add("is-idle");
-      aiStatus.textContent = "Signals locked · ready for review";
-      done();
     }
-
-    var detailSteps = pipeline.length - 2;
-
-    if (reduceMotion()) {
-      aiStatus.textContent = pipeline[pipeline.length - 1];
-      pipeline.slice(0, detailSteps).forEach(function (t) {
-        if (aiHints) {
-          var li = document.createElement("li");
-          li.textContent = t;
-          aiHints.prepend(li);
-        }
-      });
-      finishAnalyze();
-      return;
-    }
-
-    if (analyzeSpinner) analyzeSpinner.hidden = false;
-
-    var i = 0;
-    function tick() {
-      aiStatus.textContent = pipeline[i];
-      if (i < detailSteps && aiHints) {
-        var li = document.createElement("li");
-        li.textContent = pipeline[i];
-        aiHints.prepend(li);
-      }
-      i++;
-      if (i >= pipeline.length) {
-        finishAnalyze();
-      } else {
-        setTimeout(tick, 420);
-      }
-    }
-
-    tick();
   }
 
   function revealScore(metrics) {
@@ -237,6 +388,8 @@
     meterStruct.style.setProperty("--m", "0");
     meterImpact.style.setProperty("--m", "0");
     if (scoreRing) scoreRing.style.removeProperty("--score-pct");
+    var aiInsightsSection = document.getElementById("aiInsightsSection");
+    if (aiInsightsSection) aiInsightsSection.hidden = true;
   }
 
   function onPickFile(file) {
@@ -278,10 +431,49 @@
 
     analyzeBtn.disabled = true;
 
-    runAnalyze(function () {
-      var m = scoreFingerprint(currentFile);
-      revealScore(m);
+    runAnalyze(function (result, usedMockFallback) {
+      if (result) {
+        revealScore(result.ats_score);
+        
+        var aiInsightsSection = document.getElementById("aiInsightsSection");
+        var aiMissingSkills = document.getElementById("aiMissingSkills");
+        var aiImprovements = document.getElementById("aiImprovements");
+        var aiRoadmap = document.getElementById("aiRoadmap");
+        
+        if (aiInsightsSection) aiInsightsSection.hidden = false;
+        
+        if (aiMissingSkills) {
+          aiMissingSkills.innerHTML = "";
+          result.missing_skills.forEach(function(s) {
+            var li = document.createElement("li");
+            li.innerHTML = "<strong>&bull;</strong> " + s;
+            aiMissingSkills.appendChild(li);
+          });
+        }
+        
+        if (aiImprovements) {
+          aiImprovements.innerHTML = "";
+          result.improvements.forEach(function(i) {
+            var li = document.createElement("li");
+            li.innerHTML = "<strong>&bull;</strong> " + i;
+            aiImprovements.appendChild(li);
+          });
+        }
+        
+        if (aiRoadmap) {
+          aiRoadmap.innerHTML = "";
+          result.roadmap.forEach(function(r) {
+            var li = document.createElement("li");
+            li.innerHTML = "<strong>&bull;</strong> " + r;
+            aiRoadmap.appendChild(li);
+          });
+        }
+      }
+      
       successBanner.hidden = false;
+      var badge = document.getElementById("mockBadge");
+      if (badge) badge.style.display = usedMockFallback ? "inline-block" : "none";
+      
       analyzeBtn.disabled = true;
       var doneLbl = analyzeBtn.querySelector(".resume-btn__label");
       if (doneLbl) doneLbl.textContent = "Analysis complete";
@@ -312,6 +504,8 @@
     aiStatus.textContent = "Initializing models…";
     resetBtn.hidden = true;
     resetScorePanels();
+    var badge = document.getElementById("mockBadge");
+    if (badge) badge.style.display = "none";
 
     previewName.textContent = "—";
     previewSize.textContent = "—";

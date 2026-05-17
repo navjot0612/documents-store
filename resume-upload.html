@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="auth.css" />
     <link rel="stylesheet" href="resume-upload.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
   </head>
   <body class="page-auth page-resume">
     <div class="auth-backdrop" aria-hidden="true">
@@ -108,15 +112,26 @@
             <div class="resume-ai__header">
               <div class="resume-ai__chip" aria-hidden="true">
                 <span class="resume-ai__pulse"></span>
-                <span class="mono small">AI analyzer</span>
+                <span class="mono small">Analyzing Resume...</span>
               </div>
-              <p id="aiStatus" class="resume-ai__status muted small">Initializing models…</p>
             </div>
-            <div class="resume-ai__scan" aria-hidden="true">
-              <div class="resume-ai__lines"></div>
-              <div class="resume-ai__beam"></div>
+            
+            <div class="resume-ai__scanner-wrapper">
+              <div class="resume-ai__scan" aria-hidden="true">
+                <div class="resume-ai__scan-grid"></div>
+                <div class="resume-ai__lines"></div>
+                <div class="resume-ai__beam"></div>
+                <div class="resume-ai__laser"></div>
+              </div>
             </div>
-            <ul id="aiHints" class="resume-ai__hints mono small muted" aria-live="polite"></ul>
+
+            <div class="resume-ai__message-container">
+              <p id="aiStatus" class="resume-ai__status mono small">Connecting to AI core...</p>
+            </div>
+
+            <div class="resume-ai__progress">
+              <div id="aiProgressBar" class="resume-ai__progress-fill"></div>
+            </div>
           </div>
 
           <div class="resume-actions">
@@ -133,7 +148,10 @@
           <div id="successBanner" class="resume-success" hidden data-resume-section="success">
             <div class="resume-success__icon" aria-hidden="true">✓</div>
             <div>
-              <p class="resume-success__title">Analysis complete</p>
+              <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.25rem;">
+                <p class="resume-success__title" style="margin: 0;">Analysis complete</p>
+                <span id="mockBadge" class="ra-chip mono" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); font-size: 0.7rem; display: none;">Mock AI Mode (Gemini quota exceeded)</span>
+              </div>
               <p class="resume-success__desc muted small">
                 Insights are synced to your CareerOS workspace. Open the dashboard for next steps.
               </p>
@@ -224,6 +242,23 @@
                     <div id="meterImpact" class="resume-mini-meter__fill resume-mini-meter__fill--vi" style="--m: 0"></div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+          <section id="aiInsightsSection" class="resume-panel glass-panel glass-panel--elevated resume-score-section" hidden>
+            <h2 class="resume-panel__title">AI Insights</h2>
+            <div class="resume-insights">
+              <div class="resume-insight-card glass-panel glass-panel--inset">
+                <h3 class="resume-insight-card__title" style="color: #ff4d4d; margin:0 0 0.5rem; font-size: 0.95rem;">Missing Skills</h3>
+                <ul id="aiMissingSkills" class="resume-insight-list muted small" style="margin:0; padding-left: 1.2rem; line-height: 1.5;"></ul>
+              </div>
+              <div class="resume-insight-card glass-panel glass-panel--inset" style="margin-top: 1rem;">
+                <h3 class="resume-insight-card__title" style="color: #f9cb28; margin:0 0 0.5rem; font-size: 0.95rem;">Suggested Improvements</h3>
+                <ul id="aiImprovements" class="resume-insight-list muted small" style="margin:0; padding-left: 1.2rem; line-height: 1.5;"></ul>
+              </div>
+              <div class="resume-insight-card glass-panel glass-panel--inset" style="margin-top: 1rem;">
+                <h3 class="resume-insight-card__title" style="color: #34d399; margin:0 0 0.5rem; font-size: 0.95rem;">Career Roadmap</h3>
+                <ul id="aiRoadmap" class="resume-insight-list muted small" style="margin:0; padding-left: 1.2rem; line-height: 1.5;"></ul>
               </div>
             </div>
           </section>
